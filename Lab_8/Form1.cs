@@ -30,7 +30,7 @@ namespace Lab_8
                 for (int j = 0; j < 15; j++)
                 {
                     arr[i] = new int[15];
-                    temp_arr[j] = random.Next(-20,20);
+                    temp_arr[j] = random.Next(-10,11);
                     arr[i] = temp_arr;
                 }
             }
@@ -43,14 +43,28 @@ namespace Lab_8
             }
             dataGridView1.AutoResizeColumns();
             dataGridView1.AutoResizeRows();
+            
             dataGridView2.RowCount = 15;
             dataGridView2.ColumnCount = 2;
+            bool flag = true;
             for (int i = 0; i < arr.GetLength(0); i++)
             {
-                dataGridView2.Rows[i].Cells[0].Value = i+1;
-                dataGridView2.Rows[i].Cells[1].Value = Math.Round(arr[i].Average(), 3);
+                dataGridView2.Rows[i].Cells[0].Value = "";
+                dataGridView2.Rows[i].Cells[1].Value = "";
+                if (arr[i][0] == 1)
+                {
+                    dataGridView2.Rows[i].Cells[0].Value = i + 1;
+                    dataGridView2.Rows[i].Cells[1].Value = Math.Round(arr[i].Average(), 3);
+                    flag = false;
+                }
             }
-            dataGridView2.AutoResizeColumns();
+            if (flag)
+            {   
+                dataGridView2.RowCount = 1;
+                dataGridView2.ColumnCount = 1;
+                dataGridView2.Rows[0].Cells[0].Value = "Строки нет";
+            }
+                dataGridView2.AutoResizeColumns();
             dataGridView2.AutoResizeRows();
         }
     }
